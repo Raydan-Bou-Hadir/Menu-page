@@ -111,13 +111,18 @@
         function addItem() {
             let imageInput = document.getElementById('add-image');
 
-            if (!validCategory() && !validName() && !validPrice()) {
+            if (!validCategory() || !validName() || !validPrice()) {
                 return;
             }
-            else {
+
+            let imageFile = imageInput.files[0];
+            
+            if (!imageFile) {
+                alert("Please select an image.");
+                return;
+            }
                 
 
-                let imageFile = imageInput.files[0];
                 let reader = new FileReader();
 
                 reader.onload = function (e) {
@@ -134,13 +139,13 @@
                     console.log(newDrink);
                     itemsLi.push(newDrink);
                     popularItems();
+                    display();
 
                     document.getElementById('preview').src = imageUrl;
                 }
 
                 reader.readAsDataURL(imageFile);
             }
-        }
 
         function validCategory() {
             let categoryInput = document.getElementById('category');
