@@ -6,14 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ultra&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <main>
-        <div class="button">
-            <button id="display" type="button" onclick="display()">+</button>
+    <main class="p-0 w-full flex flex-col bg-cover bg-center overflow-hidden">
+        <div class="title w-full h-32 flex justify-center pt-4 ">
+            <img src="image/title.png" class="w-1/5" alt="title">
         </div>
-        <div class="menu display-none" id="menu">
+        <div class="button w-full h-14 flex justify-end ">
+            <button id="display" class="flex justify-center items-center mr-4 w-14 h-14 text-4xl" type="button" onclick="display()">+</button>
+        </div>
+        <div class="menu w-full h-4/5 flex justify-around m-4" id="menu">
+            <div class="drinks pt-12 w-1/4 flex flex-col justify-start gap-8">
+                <img src="image/burger-title.png" class="w-52" alt="burger-title">
+                <div class="drinks-el w-full h-17 flex flex-row justify-between" id="drinks-el"> <!-- ul -->
+                    
+                </div>
+            </div>
+            <div class="sauced w-1/6">
+                <img src="image/midle-menu.png" class="h-full w-full" alt="">
+            </div>
+            <div class="sand w-1/3 pt-6">
+                <img src="image/fries-title.png" class="w-52" alt="fries-title">
+                <div class="sand-el" id="sand-el">
+                </div>
+            </div>
+        </div>
+        
+
+        <!--
+        <div class="menu" id="menu">
             <div class="drinks">
                 <h2>Drinks</h2>
                 <ul class="drinks-el" id="drinks-el">
@@ -26,7 +52,7 @@
             </div>
         </div>
 
-        <div class="cart" id="cart">
+        <div class="cart hidden" id="cart">
             <h2>ADD Item</h2>
             <div class="inputs">
                 <div class="inputs-cl-1">
@@ -64,9 +90,10 @@
                     Add Item
                 </button>
             </div>
-        </div>
+        </div> -->
     </main>
 
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <script>
         let itemsLi = [
             {
@@ -97,13 +124,21 @@
 
         function generateSingItems(item) {
             return `
-                <li class="drinks-li" id="drinks-li">
-                    <div class="img">
-                            <img src="${item.img}" alt="">
+                <div id="add-image" class="img w-16 h-full">
+                        <img src="image/burger1.png" class="h-full w-full" alt="single-burger">
                     </div>
-                    <h4>${item.name}</h4>
-                    <p>$${item.price}</p>
-                </li>
+                    <div class=" w-3/5">
+                        <div class="name">
+                            <h2 class="text-xl">SINGLE BURGER</h2x>
+                        </div>
+                        <div class="description">
+                            <p class="text-l">Samshed patty, cheese, pickles and poundown sauce.</p>
+                        </div>
+                    </div>
+                    <div class="price w-10 flex items-center">
+                        <p class="text-xl" id="font-price">$10</p>
+                    </div>
+                </div>
             `
         }
 
@@ -116,36 +151,36 @@
             }
 
             let imageFile = imageInput.files[0];
-            
+
             if (!imageFile) {
                 alert("Please select an image.");
                 return;
             }
-                
 
-                let reader = new FileReader();
 
-                reader.onload = function (e) {
-                    let imageUrl = e.target.result;
+            let reader = new FileReader();
 
-                    let newDrink = {
-                        id: Date.now(),
-                        img: imageUrl,
-                        name: validName(),
-                        category: validCategory(),
-                        price: validPrice()
-                    };
+            reader.onload = function (e) {
+                let imageUrl = e.target.result;
 
-                    console.log(newDrink);
-                    itemsLi.push(newDrink);
-                    popularItems();
-                    display();
+                let newDrink = {
+                    id: Date.now(),
+                    img: imageUrl,
+                    name: validName(),
+                    category: validCategory(),
+                    price: validPrice()
+                };
 
-                    document.getElementById('preview').src = imageUrl;
-                }
+                console.log(newDrink);
+                itemsLi.push(newDrink);
+                popularItems();
+                display();
 
-                reader.readAsDataURL(imageFile);
+                document.getElementById('preview').src = imageUrl;
             }
+
+            reader.readAsDataURL(imageFile);
+        }
 
         function validCategory() {
             let categoryInput = document.getElementById('category');
@@ -201,13 +236,6 @@
             cart.classList.toggle("display-none");
             menu.classList.toggle("display-none");
         }
-
-
-
-
-
-
-
     </script>
 </body>
 
