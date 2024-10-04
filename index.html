@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <div class="button">
+            <button id="display" type="button" onclick="display()">+</button>
+        </div>
+        <div class="menu display-none" id="menu">
+            <div class="drinks">
+                <h2>Drinks</h2>
+                <ul class="drinks-el" id="drinks-el">
+                </ul>
+            </div>
+            <div class="sand">
+                <h2>Sandwiches</h2>
+                <ul class="sand-el" id="sand-el">
+                </ul>
+            </div>
+        </div>
+
+        <div class="cart" id="cart">
+            <h2>ADD Item</h2>
+            <div class="inputs">
+                <div class="inputs-cl-1">
+                    <div class="category">
+                        <h3>Category</h3>
+                        <input type="text" placeholder="Enter category" id="category">
+                        <p class="display-none red-color" id="valid-category">Enter a valid category</p>
+                    </div>
+                    <div class="add-image">
+                        <h3>Upload Image</h3>
+                        <input type="file" placeholder="ADD Image" id="add-image">
+                        <p class="display-none red-color" id="valid-image">Enter a image</p>
+                    </div>
+                </div>
+                <div class="inputs-cl-2">
+                    <div class="item-name">
+                        <h3>Item Name</h3>
+                        <input type="text" placeholder="Name" id="item-name">
+                        <p class="display-none red-color" id="valid-name">Enter a valid name</p>
+                    </div>
+                    <div class="item-price">
+                        <h3>Item Price</h3>
+                        <input type="text" placeholder="Price" id="item-price" min=1 max=100>
+                        <p class="display-none red-color" id="valid-price">Enter a valid number</p>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <h3>Item Details</h3>
+                    <textarea name="item-details red-color" id="item-details" placeholder="Details"></textarea>
+                    <p class="display-none red-color" id="valid-details">Max 3 words</p>
+                </div>
+            </div>
+            <div class="add-item">
+                <button onclick="addItem()">
+                    Add Item
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let itemsLi = [
+            {
+                id: 101,
+                img: "image/logom.png",
+                name: "Water",
+                category: "drinks",
+                price: 5,
+
+            },
+        ]
+        popularItems();
+
+        function popularItems() {
+            let drinksGallery = document.getElementById('drinks-el');
+            let sandGallery = document.getElementById('sand-el');
+            let drinksHTML = generateItems("drinks");
+            drinksGallery.innerHTML = drinksHTML;
+            let sandHTML = generateItems("sandwiches");
+            sandGallery.innerHTML = sandHTML;
+        }
+
+        function generateItems(category) {
+            return itemsLi.filter(item => item.category === category).map(function (item) {
+                return generateSingItems(item);
+            }).join("");
+        }
+
+        function generateSingItems(item) {
+            return `
+                <li class="drinks-li" id="drinks-li">
+                    <div class="img">
+                            <img src="${item.img}" alt="">
+                    </div>
+                    <h4>${item.name}</h4>
+                    <p>$${item.price}</p>
+                </li>
+            `
+        }
+
+
+        function addItem() {
+            let imageInput = document.getElementById('add-image');
+
+            if (!validCategory() && !validName() && !validPrice()) {
+                return;
+            }
+            else {
+                
+
+                let imageFile = imageInput.files[0];
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    let imageUrl = e.target.result;
+
+                    let newDrink = {
+                        id: Date.now(),
+                        img: imageUrl,
+                        name: validName(),
+                        category: validCategory(),
+                        price: validPrice()
+                    };
+
+                    console.log(newDrink);
+                    itemsLi.push(newDrink);
+                    popularItems();
+
+                    document.getElementById('preview').src = imageUrl;
+                }
+
+                reader.readAsDataURL(imageFile);
+            }
+        }
+
+        function validCategory() {
+            let categoryInput = document.getElementById('category');
+            let category = categoryInput.value
+            let validCat = document.getElementById('valid-category');
+            if (category === "drinks" || category === "sandwiches") {
+                validCat.classList.add('display-none');
+                return category
+            }
+            else {
+                validCat.classList.remove('display-none');
+                categoryInput.value = '';
+                return;
+            }
+        }
+
+        function validName() {
+            let nameInput = document.getElementById('item-name');
+            let name = nameInput.value;
+            let validName = document.getElementById('valid-name');
+
+            if (!/^[A-Za-z]+$/.test(name)) {
+                validName.classList.remove('display-none');
+                nameInput.value = '';
+                return;
+            }
+            else {
+                validName.classList.add('display-none');
+                return name;
+            }
+        }
+
+        function validPrice() {
+            let priceInput = document.getElementById('item-price');
+            let price = priceInput.value;
+            let validPrice = document.getElementById('valid-price');
+
+            if (!/^[0-9]+$/.test(price)) {
+                validPrice.classList.remove('display-none');
+                priceInput.value = '';
+                return;
+            }
+            else {
+                validPrice.classList.add('display-none');
+                return price;
+            }
+        }
+
+        function display() {
+            let menu = document.getElementById('menu');
+            let cart = document.getElementById('cart');
+
+            cart.classList.toggle("display-none");
+            menu.classList.toggle("display-none");
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
