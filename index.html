@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ultra&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ultra&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -18,102 +20,96 @@
             <img src="image/title.png" class="w-1/5" alt="title">
         </div>
         <div class="button w-full h-14 flex justify-end ">
-            <button id="display" class="flex justify-center items-center mr-4 w-14 h-14 text-4xl" type="button" onclick="display()">+</button>
+            <button id="display" class="flex justify-center items-center mr-4 w-14 h-14 text-4xl" type="button"
+                onclick="display()">+</button>
         </div>
-        <div class="menu w-full h-4/5 flex justify-around m-4" id="menu">
+        <div class=" menu w-full h-4/5 flex justify-around m-4" id="menu">
             <div class="drinks pt-12 w-1/4 flex flex-col justify-start gap-8">
                 <img src="image/burger-title.png" class="w-52" alt="burger-title">
-                <div class="drinks-el w-full h-17 flex flex-row justify-between" id="drinks-el"> <!-- ul -->
-                    
+                <div class="burger-el w-full h-17 flex flex-col gap-10 justify-between" id="burger-el">
                 </div>
             </div>
             <div class="sauced w-1/6">
                 <img src="image/midle-menu.png" class="h-full w-full" alt="">
             </div>
-            <div class="sand w-1/3 pt-6">
+            <div class="fries w-1/4 pt-6">
                 <img src="image/fries-title.png" class="w-52" alt="fries-title">
-                <div class="sand-el" id="sand-el">
+                <div class="fries-el w-full h-17 pt-6  flex flex-col gap-10 justify-between" id="fries-el">
                 </div>
             </div>
         </div>
         
-
-        <!--
-        <div class="menu" id="menu">
-            <div class="drinks">
-                <h2>Drinks</h2>
-                <ul class="drinks-el" id="drinks-el">
-                </ul>
-            </div>
-            <div class="sand">
-                <h2>Sandwiches</h2>
-                <ul class="sand-el" id="sand-el">
-                </ul>
-            </div>
-        </div>
-
-        <div class="cart hidden" id="cart">
-            <h2>ADD Item</h2>
-            <div class="inputs">
-                <div class="inputs-cl-1">
-                    <div class="category">
-                        <h3>Category</h3>
-                        <input type="text" placeholder="Enter category" id="category">
-                        <p class="display-none red-color" id="valid-category">Enter a valid category</p>
+        <div class="cart hidden backdrop-blur-sm m-auto w-3/5 h-full flex flex-col items-center gap-7" id="cart">
+            <h2 class="text-4xl font-bold">ADD ITEM</h2>
+            <div class="inputs w-full h-3/5 flex flex-col gap-8 justify-center items-center">
+                <div class="w-full flex flex-row justify-around">
+                    <div class="category w-1/4">
+                        <h3 class="text-xl font-semibold">Category</h3>
+                        <input type="text" class="border-none rounded-lg" placeholder="Enter category" id="category">
+                        <p class="hidden text-red-600" id="valid-category">Enter a valid category</p>
                     </div>
-                    <div class="add-image">
-                        <h3>Upload Image</h3>
-                        <input type="file" placeholder="ADD Image" id="add-image">
-                        <p class="display-none red-color" id="valid-image">Enter a image</p>
+                    <div class="add-image w-1/4 justify-center">
+                        <h3 class="text-xl font-semibold">Upload Image</h3>
+                        <input type="file" class="border-none" placeholder="ADD Image" id="image-upload">
+                        <p class="hidden text-red-600" id="valid-image">Enter a image</p>
                     </div>
                 </div>
-                <div class="inputs-cl-2">
-                    <div class="item-name">
-                        <h3>Item Name</h3>
-                        <input type="text" placeholder="Name" id="item-name">
-                        <p class="display-none red-color" id="valid-name">Enter a valid name</p>
+                <div class="inputs-cl-2 w-full h-2/5 flex flex-row justify-around">
+                    <div class="item-name w-1/4">
+                        <h3 class="text-xl font-semibold">Item Name</h3>
+                        <input type="text" class="border-none rounded-lg" placeholder="Name" id="item-name">
+                        <p class="hidden text-red-600" id="valid-name">Enter a valid name</p>
                     </div>
-                    <div class="item-price">
-                        <h3>Item Price</h3>
-                        <input type="text" placeholder="Price" id="item-price" min=1 max=100>
-                        <p class="display-none red-color" id="valid-price">Enter a valid number</p>
+                    <div class="item-price w-1/4">
+                        <h3 class="text-xl font-semibold">Item Price</h3>
+                        <input type="text" class="border-none rounded-lg" placeholder="Price" id="item-price" min=1 max=100>
+                        <p class="hidden text-red-600" id="valid-price">Enter a valid number</p>
                     </div>
                 </div>
-                <div class="item-details">
-                    <h3>Item Details</h3>
+                <div class="item-details w-2/5 h-2/5 flex flex-col justify-start">
+                    <h3 class="text-xl font-semibold">Item Details</h3>
                     <textarea name="item-details red-color" id="item-details" placeholder="Details"></textarea>
-                    <p class="display-none red-color" id="valid-details">Max 3 words</p>
+                    <p class="hidden text-red-600" id="valid-details">Max 3 words</p>
                 </div>
             </div>
-            <div class="add-item">
-                <button onclick="addItem()">
-                    Add Item
+            <div class="add-item flex flex-row justify-center items-center ">
+                <button onclick="addItem()" class="text-2xl font-bold">
+                    ADD ITEM
                 </button>
             </div>
-        </div> -->
+        </div>
     </main>
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <script>
         let itemsLi = [
             {
                 id: 101,
-                img: "image/logom.png",
-                name: "Water",
-                category: "drinks",
-                price: 5,
-
+                img: "image/burger1.png",
+                name: "SINGLE BURGER",
+                description: "Samshed patty, cheese, pickles and poundown sauce.",
+                category: "burger",
+                price: 10
             },
+            {
+                id: 102,
+                img: "image/fries-image1.png",
+                name: "FRENCH FRIES",
+                description: "Samshed patty, cheese, pickles and poundown sauce.",
+                category: "fries",
+                price: 8
+            }
         ]
         popularItems();
 
         function popularItems() {
-            let drinksGallery = document.getElementById('drinks-el');
-            let sandGallery = document.getElementById('sand-el');
-            let drinksHTML = generateItems("drinks");
-            drinksGallery.innerHTML = drinksHTML;
-            let sandHTML = generateItems("sandwiches");
-            sandGallery.innerHTML = sandHTML;
+            let burgerGallery = document.getElementById('burger-el');
+            let friesGallery = document.getElementById('fries-el');
+            let burgerHTML = generateItems("burger");
+            burgerGallery.innerHTML = burgerHTML;
+            let friesHTML = generateItems("fries");
+            friesGallery.innerHTML = friesHTML;
         }
 
         function generateItems(category) {
@@ -124,19 +120,20 @@
 
         function generateSingItems(item) {
             return `
-                <div id="add-image" class="img w-16 h-full">
-                        <img src="image/burger1.png" class="h-full w-full" alt="single-burger">
+                <div class="w-full h-17 flex flex-row justify-between">
+                    <div id="add-image" class="img w-16 h-full">
+                        <img src="${item.img}" class="h-full w-full" alt="">
                     </div>
                     <div class=" w-3/5">
                         <div class="name">
-                            <h2 class="text-xl">SINGLE BURGER</h2x>
+                            <h2 class="text-xl font-bold">${item.name}</h2x>
                         </div>
                         <div class="description">
-                            <p class="text-l">Samshed patty, cheese, pickles and poundown sauce.</p>
+                            <p class="text-l">${item.description}</p>
                         </div>
                     </div>
                     <div class="price w-10 flex items-center">
-                        <p class="text-xl" id="font-price">$10</p>
+                        <p class="text-xl" id="font-price">$${item.price}</p>
                     </div>
                 </div>
             `
@@ -144,7 +141,7 @@
 
 
         function addItem() {
-            let imageInput = document.getElementById('add-image');
+            let imageInput = document.getElementById('image-upload');
 
             if (!validCategory() || !validName() || !validPrice()) {
                 return;
@@ -153,7 +150,8 @@
             let imageFile = imageInput.files[0];
 
             if (!imageFile) {
-                alert("Please select an image.");
+                let validImage = document.getElementById('valid-image');
+                validImage.classList.remove('hidden');
                 return;
             }
 
@@ -163,7 +161,7 @@
             reader.onload = function (e) {
                 let imageUrl = e.target.result;
 
-                let newDrink = {
+                let newBurger = {
                     id: Date.now(),
                     img: imageUrl,
                     name: validName(),
@@ -171,8 +169,8 @@
                     price: validPrice()
                 };
 
-                console.log(newDrink);
-                itemsLi.push(newDrink);
+                console.log(newBurger);
+                itemsLi.push(newBurger);
                 popularItems();
                 display();
 
@@ -186,12 +184,12 @@
             let categoryInput = document.getElementById('category');
             let category = categoryInput.value
             let validCat = document.getElementById('valid-category');
-            if (category === "drinks" || category === "sandwiches") {
-                validCat.classList.add('display-none');
+            if (category === "burger" ||category === "Burger"|| category === "fries"||category === "Fries") {
+                validCat.classList.add('hidden');
                 return category
             }
             else {
-                validCat.classList.remove('display-none');
+                validCat.classList.remove('hidden');
                 categoryInput.value = '';
                 return;
             }
@@ -199,16 +197,16 @@
 
         function validName() {
             let nameInput = document.getElementById('item-name');
-            let name = nameInput.value;
+            let name = nameInput.value.trim();
             let validName = document.getElementById('valid-name');
 
             if (!/^[A-Za-z]+$/.test(name)) {
-                validName.classList.remove('display-none');
+                validName.classList.remove('hidden');
                 nameInput.value = '';
                 return;
             }
             else {
-                validName.classList.add('display-none');
+                validName.classList.add('hidden');
                 return name;
             }
         }
@@ -219,12 +217,12 @@
             let validPrice = document.getElementById('valid-price');
 
             if (!/^[0-9]+$/.test(price)) {
-                validPrice.classList.remove('display-none');
+                validPrice.classList.remove('hidden');
                 priceInput.value = '';
                 return;
             }
             else {
-                validPrice.classList.add('display-none');
+                validPrice.classList.add('hidden');
                 return price;
             }
         }
@@ -233,8 +231,8 @@
             let menu = document.getElementById('menu');
             let cart = document.getElementById('cart');
 
-            cart.classList.toggle("display-none");
-            menu.classList.toggle("display-none");
+            cart.classList.toggle("hidden");
+            menu.classList.toggle("hidden");
         }
     </script>
 </body>
