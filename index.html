@@ -15,22 +15,29 @@
 </head>
 
 <body>
-    <main class="p-0 w-full flex flex-col bg-cover bg-center overflow-hidden">
+    <main class="p-0 w-full desktop:flex flex-col bg-cover bg-center overflow-hidden">
         <div class="title w-full h-32 flex justify-center pt-4 ">
-            <img src="image/title.png" class="w-1/5" alt="title">
+            <a href="#" class="w-1/5" onclick="homePage()">
+                <img src="image/title.png" class="w-full" alt="title">
+            </a>
         </div>
         <div class="button w-full h-14 flex justify-end ">
             <button id="display" class="flex justify-center items-center mr-4 w-14 h-14 text-4xl" type="button"
                 onclick="display()">+</button>
         </div>
-        <div class=" menu w-full h-4/5 flex justify-around m-4" id="menu">
-            <div class="drinks pt-12 w-1/4 flex flex-col justify-start gap-8">
+        <div class=" menu w-full h-4/5 flex justify-around m-4 md:flex-row lg:flex-row" id="menu">
+            <div class="pt-12 w-1/4 flex flex-col justify-start gap-8">
                 <img src="image/burger-title.png" class="w-52" alt="burger-title">
                 <div class="burger-el w-full h-17 flex flex-col gap-10 justify-between" id="burger-el">
                 </div>
             </div>
-            <div class="sauced w-1/6">
-                <img src="image/midle-menu.png" class="h-full w-full" alt="">
+            <div id="sauced" class="sauced flex justify-center pt-9 w-1/4">
+                <img src="image/midle-menu.png" class=" h-full" alt="">
+            </div>
+            <div id="drink" class="drink hidden pt-9 w-1/4 flex flex-col justify-start gap-8">
+                <img src="image/drinks-title.png" class="w-52" alt="drink-title">
+                <div class="drink-el w-full h-17 flex flex-col gap-10 justify-between" id="drink-el">
+                </div>
             </div>
             <div class="fries w-1/4 pt-6">
                 <img src="image/fries-title.png" class="w-52" alt="fries-title">
@@ -106,10 +113,13 @@
         function popularItems() {
             let burgerGallery = document.getElementById('burger-el');
             let friesGallery = document.getElementById('fries-el');
+            let drinkGallery = document.getElementById('drink-el');
             let burgerHTML = generateItems("burger");
             burgerGallery.innerHTML = burgerHTML;
             let friesHTML = generateItems("fries");
             friesGallery.innerHTML = friesHTML;
+            let drinkHTML = generateItems("drink");
+            drinkGallery.innerHTML = drinkHTML;
         }
 
         function generateItems(category) {
@@ -126,7 +136,7 @@
                     </div>
                     <div class=" w-3/5">
                         <div class="name">
-                            <h2 class="text-xl font-bold">${item.name}</h2x>
+                            <h2 class="text-xl font-bold">${item.name}</h2>
                         </div>
                         <div class="description">
                             <p class="text-l">${item.description}</p>
@@ -182,11 +192,25 @@
 
         function validCategory() {
             let categoryInput = document.getElementById('category');
-            let category = categoryInput.value
+            let category = categoryInput.value;
             let validCat = document.getElementById('valid-category');
-            if (category === "burger" ||category === "Burger"|| category === "fries"||category === "Fries") {
+            let hiddenDrink = document.getElementById('drink');
+            let hiddenSauced = document.getElementById('sauced');
+            
+            if (category === "burger" ||
+                category === "Burger"|| 
+                category === "fries"||
+                category === "Fries")
+            {
+
                 validCat.classList.add('hidden');
                 return category
+            }
+            else if(category === "drink"|| category === "Drink"){
+                validCat.classList.add('hidden');
+                hiddenSauced.classList.add('hidden');
+                hiddenDrink.classList.remove('hidden');
+                return category;
             }
             else {
                 validCat.classList.remove('hidden');
