@@ -258,6 +258,19 @@
             cart.classList.toggle("hidden");
             menu.classList.toggle("hidden");
         }
+
+        function homePage(){
+            let menu = document.getElementById('menu');
+            let cart = document.getElementById('cart');
+
+            if(cart.classList.contains('hidden')){
+                menu.classList.remove('hidden');
+            }
+            else{
+                cart.classList.add('hidden');
+                menu.classList.remove('hidden');
+            }
+        }
     </script>
 </body>
 
